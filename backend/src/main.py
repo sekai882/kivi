@@ -4,7 +4,7 @@ import dotenv
 dotenv.load_dotenv()
 
 from src.api.v1.endpoints import webhooks
-
+from src.api.v1.endpoints import documents
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
@@ -22,6 +22,7 @@ app.add_middleware(
 )
 
 app.include_router(webhooks.router, prefix="/api/v1/webhook", tags=["Webhook"])
+app.include_router(documents.router, prefix="/api/v1/documents", tags=["Documents"])
 
 @app.get("/")
 async def root():
