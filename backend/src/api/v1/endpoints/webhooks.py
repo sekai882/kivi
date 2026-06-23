@@ -33,7 +33,7 @@ async def receive_webhook(request: Request, background_tasks: BackgroundTasks):
     try:
         payload_dict = json.loads(payload_bytes)
         payload = WhatsAppWebhookPayload(**payload_dict)
-    except Exception as e:
+    except Exception:
         # WhatsApp expects 200 to acknowledge receipt even if parsing fails for non-message events
         return Response(content="OK", status_code=200)
 

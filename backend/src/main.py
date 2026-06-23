@@ -3,14 +3,14 @@ import dotenv
 
 dotenv.load_dotenv()
 
-from src.api.v1.endpoints import webhooks
-from src.api.v1.endpoints import documents
-from fastapi.middleware.cors import CORSMiddleware
+from src.api.v1.endpoints import webhooks  # noqa: E402
+from src.api.v1.endpoints import documents  # noqa: E402
+from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 
 app = FastAPI(
     title="KIVI Backend",
     description="Backend API for KIVI WhatsApp SaaS",
-    version="0.1.0"
+    version="0.1.0",
 )
 
 app.add_middleware(
@@ -24,9 +24,11 @@ app.add_middleware(
 app.include_router(webhooks.router, prefix="/api/v1/webhook", tags=["Webhook"])
 app.include_router(documents.router, prefix="/api/v1/documents", tags=["Documents"])
 
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to KIVI API"}
+
 
 @app.get("/health")
 async def health_check():

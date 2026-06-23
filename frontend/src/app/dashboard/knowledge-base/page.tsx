@@ -100,7 +100,7 @@ export default function KnowledgeBasePage() {
           {[
             { label: "Inicio", href: "/dashboard" },
             { label: "Bases de Conocimiento (PDFs)", href: "/dashboard/knowledge-base" },
-            { label: "Historial de Chats", href: "#" },
+            { label: "Historial de Chats", href: "/dashboard/conversations" },
             { label: "Configuración", href: "#" },
           ].map((item, idx) => (
             <a
