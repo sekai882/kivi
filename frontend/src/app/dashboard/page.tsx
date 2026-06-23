@@ -11,17 +11,22 @@ export default function DashboardPage() {
           </span>
         </div>
         <nav className="flex-1 px-4 py-6 space-y-2">
-          {["Inicio", "Bases de Conocimiento (PDFs)", "Historial de Chats", "Configuración"].map((item, idx) => (
+          {[
+            { label: "Inicio", href: "/dashboard" },
+            { label: "Bases de Conocimiento (PDFs)", href: "/dashboard/knowledge-base" },
+            { label: "Historial de Chats", href: "#" },
+            { label: "Configuración", href: "#" },
+          ].map((item, idx) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                 idx === 0
                   ? "bg-emerald-500/10 text-emerald-400"
                   : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
               }`}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
