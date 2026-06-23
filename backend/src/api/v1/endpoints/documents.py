@@ -1,15 +1,11 @@
 import uuid
-import random
 from fastapi import APIRouter, UploadFile, File, Depends, Form, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.infrastructure.database.session import get_db_session
 from src.modules.conversation.repository import KnowledgeBaseRepository
+from src.infrastructure.external import openai_client
 
 router = APIRouter()
-
-# Mock function to simulate OpenAI embedding generation
-def generate_mock_embedding(text: str) -> list[float]:
-    return [random.uniform(-1, 1) for _ in range(1536)]
 
 @router.post("/upload")
 async def upload_document(
@@ -36,7 +32,8 @@ async def upload_document(
         if not chunk.strip():
             continue
             
-        embedding = generate_mock_embedding(chunk)
+        # Generate real embedding via OpenAI
+        embedding = await openai_client.get_embedding(chunk)
         kb_record = await repo.save_chunk(
             tenant_id=tenant_id,
             document_name=file.filename or "unknown",
@@ -50,3 +47,4 @@ async def upload_document(
         "message": f"Processed {len(saved_chunks)} chunks for document '{file.filename}'",
         "tenant_id": tenant_id
     }
+
