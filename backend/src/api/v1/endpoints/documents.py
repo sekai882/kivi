@@ -3,7 +3,7 @@ from fastapi import APIRouter, UploadFile, File, Depends, Form, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.infrastructure.database.session import get_db_session
 from src.modules.conversation.repository import KnowledgeBaseRepository
-from src.infrastructure.external import openai_client
+from src.infrastructure.external import gemini_client
 
 router = APIRouter()
 
@@ -32,8 +32,8 @@ async def upload_document(
         if not chunk.strip():
             continue
             
-        # Generate real embedding via OpenAI
-        embedding = await openai_client.get_embedding(chunk)
+        # Generate real embedding via Gemini
+        embedding = await gemini_client.get_embedding(chunk)
         kb_record = await repo.save_chunk(
             tenant_id=tenant_id,
             document_name=file.filename or "unknown",

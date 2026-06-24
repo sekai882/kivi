@@ -12,5 +12,5 @@ class KnowledgeBase(Base):
     tenant_id = Column(UUID(as_uuid=True), ForeignKey('tenants.id', ondelete='CASCADE'), nullable=False, index=True)
     document_name = Column(String, nullable=False)
     chunk_text = Column(String, nullable=False)
-    embedding = Column(Vector(1536))
+    embedding = Column(Vector(768))
     created_at = Column(DateTime(timezone=True), server_default=func.now())

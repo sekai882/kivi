@@ -7,6 +7,6 @@ asyncpg
 redis
 python-dotenv
 pgvector
-openai
+google-generativeai
 python-multipart
 httpx
