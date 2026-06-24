@@ -22,6 +22,7 @@ async def process_whatsapp_message(phone_number_id: str, customer_number: str, m
             if message_type == "text" and body:
                 ai_response = await generate_tenant_response(
                     tenant_id=tenant.id,
+                    customer_phone=customer_number,
                     user_message=body
                 )
                 print(f"[KIVI AI ANSWER] Respuesta generada para el negocio {tenant.business_name}: {ai_response}")
